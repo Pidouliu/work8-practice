@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音乐排行榜</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <header class="site-header">
+        <div class="header-inner">
+            <h1 class="logo">🎵 音乐排行榜</h1>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="搜索歌曲或歌手..." aria-label="搜索">
+                <button id="searchBtn" aria-label="搜索按钮">🔍</button>
+            </div>
+        </div>
+        <nav class="tab-nav" role="tablist">
+            <button class="tab-btn active" data-tab="ranking" role="tab">热歌榜</button>
+            <button class="tab-btn" data-tab="favorites" role="tab">我的收藏</button>
+            <button class="tab-btn" data-tab="chart" role="tab">数据看板</button>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- 榜单视图 -->
+        <section id="ranking" class="tab-panel active">
+            <div class="panel-header">
+                <h2>热歌榜单 TOP 10</h2>
+                <div class="sort-controls">
+                    <label for="sortSelect">排序：</label>
+                    <select id="sortSelect">
+                        <option value="plays">播放量</option>
+                        <option value="likes">点赞数</option>
+                        <option value="name">歌曲名</option>
+                    </select>
+                </div>
+            </div>
+            <ul id="songList" class="song-list">
+                <!-- 歌曲条目由 JS 渲染 -->
+            </ul>
+            <p id="emptyTip" class="empty-tip" hidden>暂无符合条件的歌曲</p>
+        </section>
+
+        <!-- 收藏视图 -->
+        <section id="favorites" class="tab-panel">
+            <div class="panel-header">
+                <h2>我的收藏</h2>
+            </div>
+            <ul id="favList" class="song-list">
+                <!-- 收藏条目由 JS 渲染 -->
+            </ul>
+            <p id="favEmptyTip" class="empty-tip" hidden>还没有收藏任何歌曲，去榜单里点点 ♥ 吧</p>
+        </section>
+
+        <!-- 数据看板视图 -->
+        <section id="chart" class="tab-panel">
+            <div class="panel-header">
+                <h2>播放量可视化</h2>
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="playsChart" width="800" height="400" aria-label="播放量柱状图"></canvas>
+            </div>
+        </section>
+    </main>
+
+    <!-- 播放状态栏 -->
+    <div id="playerBar" class="player-bar" hidden>
+        <span id="nowPlaying">♪ 正在播放：-</span>
+        <button id="closePlayer" aria-label="关闭播放器">✕</button>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
