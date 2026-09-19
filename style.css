@@ -1,6 +1,6 @@
 /* 音乐排行榜 - 样式表 */
 
-/* 基础重置 */
+/* ========== 基础重置 ========== */
 * {
     margin: 0;
     padding: 0;
@@ -12,10 +12,374 @@ body {
     background: #f5f5f7;
     color: #1d1d1f;
     line-height: 1.6;
+    min-height: 100vh;
 }
 
+button {
+    cursor: pointer;
+    font-family: inherit;
+    border: none;
+    background: none;
+}
+
+ul {
+    list-style: none;
+}
+
+/* ========== 顶部导航 ========== */
+.site-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+.header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.search-box {
+    display: flex;
+    flex: 1;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 10px 16px;
+    border: none;
+    background: transparent;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+}
+
+.search-box input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.search-box button {
+    padding: 0 16px;
+    color: #fff;
+    font-size: 16px;
+}
+
+/* 标签页导航 */
+.tab-nav {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    gap: 4px;
+}
+
+.tab-btn {
+    padding: 12px 20px;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 15px;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+}
+
+.tab-btn:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.tab-btn.active {
+    color: #fff;
+    border-bottom-color: #ffd54f;
+    font-weight: 600;
+}
+
+/* ========== 主容器 ========== */
 .container {
     max-width: 1100px;
     margin: 0 auto;
+    padding: 24px 20px;
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.panel-header h2 {
+    font-size: 22px;
+}
+
+.sort-controls select {
+    padding: 8px 12px;
+    border: 1px solid #d0d0d5;
+    border-radius: 8px;
+    background: #fff;
+    font-size: 14px;
+}
+
+/* ========== 歌曲列表 ========== */
+.song-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.song-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 18px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.song-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+/* 排名徽章 */
+.rank-badge {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    background: #e8e8ed;
+    color: #555;
+    flex-shrink: 0;
+}
+
+.rank-badge.rank-1 { background: linear-gradient(135deg, #ffd700, #ffb300); color: #5d4037; }
+.rank-badge.rank-2 { background: linear-gradient(135deg, #e0e0e0, #bdbdbd); color: #424242; }
+.rank-badge.rank-3 { background: linear-gradient(135deg, #ffab91, #ff8a65); color: #4e342e; }
+
+/* 封面 */
+.cover {
+    width: 52px;
+    height: 52px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    flex-shrink: 0;
+}
+
+/* 歌曲信息 */
+.song-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.song-name {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.song-meta {
+    font-size: 13px;
+    color: #86868b;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 数据 */
+.song-stats {
+    display: flex;
+    gap: 16px;
+    font-size: 13px;
+    color: #6e6e73;
+    flex-shrink: 0;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* 操作按钮 */
+.song-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.play-btn, .fav-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all 0.15s;
+}
+
+.play-btn {
+    background: #667eea;
+    color: #fff;
+}
+
+.play-btn:hover { background: #5568d3; }
+
+.fav-btn {
+    background: #f0f0f4;
+    color: #86868b;
+}
+
+.fav-btn:hover { background: #e0e0e8; }
+
+.fav-btn.active {
+    background: #fff0f0;
+    color: #ff4757;
+}
+
+/* 空数据提示 */
+.empty-tip {
+    text-align: center;
+    padding: 60px 20px;
+    color: #86868b;
+    font-size: 15px;
+}
+
+/* ========== 数据看板 ========== */
+.chart-wrapper {
+    background: #fff;
+    border-radius: 12px;
     padding: 20px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    overflow-x: auto;
+}
+
+#playsChart {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ========== 播放状态栏 ========== */
+.player-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #1d1d1f;
+    color: #fff;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.2);
+}
+
+#closePlayer {
+    color: #fff;
+    font-size: 16px;
+    padding: 4px 8px;
+}
+
+/* ========== 响应式：三档宽度 ========== */
+
+/* 桌面端 (>1024px) 使用默认布局 */
+
+/* 平板端 (768px - 1024px) */
+@media (max-width: 1024px) {
+    .header-inner {
+        flex-wrap: wrap;
+    }
+    .search-box {
+        order: 3;
+        max-width: 100%;
+        width: 100%;
+    }
+    .song-stats {
+        display: none;
+    }
+}
+
+/* 移动端 (<768px) */
+@media (max-width: 768px) {
+    .logo {
+        font-size: 18px;
+    }
+    .tab-btn {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+    .panel-header h2 {
+        font-size: 18px;
+    }
+    .song-item {
+        padding: 12px;
+        gap: 10px;
+    }
+    .rank-badge {
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
+    }
+    .cover {
+        width: 42px;
+        height: 42px;
+        font-size: 20px;
+    }
+    .song-name {
+        font-size: 14px;
+    }
+    .song-meta {
+        font-size: 12px;
+    }
+    .play-btn, .fav-btn {
+        width: 34px;
+        height: 34px;
+        font-size: 14px;
+    }
 }
